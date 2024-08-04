@@ -1,0 +1,16 @@
+2024-05-24 12:08:22,118 | INFO | models: ['LeNet5', 'AlexNet', 'MNISTVGGNet', 'MNISTResNet']
+datasets: ['MNIST']
+log_path: ./logs/
+plot_path: ./plot/
+dpi: 70
+clip: [0.0, 3.0]
+2024-05-24 14:00:18,432 | INFO | models: ['LeNet5', 'AlexNet', 'MNISTVGGNet', 'MNISTResNet']
+datasets: ['MNIST']
+log_path: ./logs/
+plot_path: ./plot/
+dpi: 70
+clip: [0.0, 3.0]
+2024-05-24 14:00:18,468 | INFO | processed lenet5 mnist
+2024-05-24 14:00:18,696 | INFO | processed alexnet mnist
+2024-05-24 14:00:18,864 | INFO | processed mnistvggnet mnist
+2024-05-24 14:00:19,070 | INFO | processed mnistresnet mnist

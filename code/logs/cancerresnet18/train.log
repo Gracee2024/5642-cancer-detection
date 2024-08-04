@@ -1,0 +1,1110 @@
+2024-06-20 01:13:08,195 | INFO | 
+model:
+  name: CancerResNet18
+  output_dim: 10
+  n_blocks: [2, 2, 2, 2]
+  n_channels: [64, 128, 256, 512]
+optimizer:
+  name: Adam
+  parameters:
+    lr: 0.001
+    weight_decay: 0.0005
+dataset:
+  name: cancer
+  data_dir: ./data
+  batch_size: 64
+  split:
+    train: 0.9
+    valid: 0.1
+    test: 1.0
+train:
+  epochs: 50
+  device: cuda:0
+  save_path: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+  save_every: 2
+test:
+  device: cuda:0
+  checkpoint: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+2024-06-20 01:13:08,196 | INFO | 
+CancerResNet(
+  (conv): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  (bn): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (act): ReLU()
+  (max_pool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (backbone): ResNetBase(
+    (blocks): Sequential(
+      (0): ResidualBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (1): ResidualBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (2): ResidualBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (3): ResidualBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (4): ResidualBlock(
+        (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (5): ResidualBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (6): ResidualBlock(
+        (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (7): ResidualBlock(
+        (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+    )
+  )
+  (avg_pool): AdaptiveAvgPool2d(output_size=(1, 1))
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (fc): Linear(in_features=512, out_features=10, bias=True)
+)
+2024-06-20 01:13:08,196 | INFO | 
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.0005
+)
+2024-06-20 01:13:08,196 | INFO | 
+CrossEntropyLoss()
+2024-06-20 01:15:07,286 | INFO | 
+model:
+  name: CancerResNet18
+  output_dim: 10
+  n_blocks: [2, 2, 2, 2]
+  n_channels: [64, 128, 256, 512]
+optimizer:
+  name: Adam
+  parameters:
+    lr: 0.001
+    weight_decay: 0.0005
+dataset:
+  name: cancer
+  data_dir: ./data
+  batch_size: 64
+  split:
+    train: 0.9
+    valid: 0.1
+    test: 1.0
+train:
+  epochs: 50
+  device: cuda:0
+  save_path: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+  save_every: 2
+test:
+  device: cuda:0
+  checkpoint: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+2024-06-20 01:15:07,287 | INFO | 
+CancerResNet(
+  (conv): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  (bn): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (act): ReLU()
+  (max_pool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (backbone): ResNetBase(
+    (blocks): Sequential(
+      (0): ResidualBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (1): ResidualBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (2): ResidualBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (3): ResidualBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (4): ResidualBlock(
+        (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (5): ResidualBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (6): ResidualBlock(
+        (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (7): ResidualBlock(
+        (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+    )
+  )
+  (avg_pool): AdaptiveAvgPool2d(output_size=(1, 1))
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (fc): Linear(in_features=512, out_features=10, bias=True)
+)
+2024-06-20 01:15:07,287 | INFO | 
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.0005
+)
+2024-06-20 01:15:07,287 | INFO | 
+CrossEntropyLoss()
+2024-06-20 08:50:21,930 | INFO | 
+model:
+  name: CancerResNet18
+  output_dim: 10
+  n_blocks: [2, 2, 2, 2]
+  n_channels: [64, 128, 256, 512]
+optimizer:
+  name: Adam
+  parameters:
+    lr: 0.001
+    weight_decay: 0.0005
+dataset:
+  name: cancer
+  data_dir: ./data
+  batch_size: 64
+  split:
+    train: 0.9
+    valid: 0.1
+    test: 1.0
+train:
+  epochs: 50
+  device: cuda:0
+  save_path: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+  save_every: 2
+test:
+  device: cuda:0
+  checkpoint: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+2024-06-20 08:50:21,931 | INFO | 
+CancerResNet(
+  (conv): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  (bn): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (act): ReLU()
+  (max_pool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (backbone): ResNetBase(
+    (blocks): Sequential(
+      (0): ResidualBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (1): ResidualBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (2): ResidualBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (3): ResidualBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (4): ResidualBlock(
+        (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (5): ResidualBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (6): ResidualBlock(
+        (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (7): ResidualBlock(
+        (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+    )
+  )
+  (avg_pool): AdaptiveAvgPool2d(output_size=(1, 1))
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (fc): Linear(in_features=512, out_features=10, bias=True)
+)
+2024-06-20 08:50:21,931 | INFO | 
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.0005
+)
+2024-06-20 08:50:21,931 | INFO | 
+CrossEntropyLoss()
+2024-06-20 09:04:23,995 | INFO | cuda:0 epoch: 1/50 train_loss: 0.3556 valid_loss: 0.3669 epoch_time: 837.666 sec
+2024-06-20 09:17:44,457 | INFO | cuda:0 epoch: 2/50 train_loss: 0.2831 valid_loss: 0.2980 epoch_time: 800.458 sec
+2024-06-20 09:30:39,577 | INFO | cuda:0 epoch: 3/50 train_loss: 0.2532 valid_loss: 0.3392 epoch_time: 775.117 sec
+2024-06-20 09:43:16,108 | INFO | cuda:0 epoch: 4/50 train_loss: 0.2373 valid_loss: 0.2133 epoch_time: 756.519 sec
+2024-06-20 09:55:58,239 | INFO | cuda:0 epoch: 5/50 train_loss: 0.2286 valid_loss: 0.2069 epoch_time: 762.129 sec
+2024-06-20 10:08:34,542 | INFO | cuda:0 epoch: 6/50 train_loss: 0.2222 valid_loss: 0.1998 epoch_time: 756.300 sec
+2024-06-20 10:21:10,942 | INFO | cuda:0 epoch: 7/50 train_loss: 0.2175 valid_loss: 0.2565 epoch_time: 756.394 sec
+2024-06-20 10:33:41,764 | INFO | cuda:0 epoch: 8/50 train_loss: 0.2159 valid_loss: 0.2150 epoch_time: 750.821 sec
+2024-06-20 10:52:01,972 | INFO | 
+model:
+  name: CancerResNet18
+  output_dim: 10
+  n_blocks: [2, 2, 2, 2]
+  n_channels: [64, 128, 256, 512]
+optimizer:
+  name: Adam
+  parameters:
+    lr: 0.001
+    weight_decay: 0.0005
+dataset:
+  name: cancer
+  data_dir: ./data
+  batch_size: 64
+  split:
+    train: 0.9
+    valid: 0.1
+    test: 1.0
+train:
+  epochs: 50
+  device: cuda:0
+  save_path: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+  save_every: 2
+test:
+  device: cuda:0
+  checkpoint: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+2024-06-20 10:52:01,973 | INFO | 
+CancerResNet(
+  (conv): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  (bn): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (act): ReLU()
+  (max_pool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (backbone): ResNetBase(
+    (blocks): Sequential(
+      (0): ResidualBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (1): ResidualBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (2): ResidualBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (3): ResidualBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (4): ResidualBlock(
+        (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (5): ResidualBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (6): ResidualBlock(
+        (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (7): ResidualBlock(
+        (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+    )
+  )
+  (avg_pool): AdaptiveAvgPool2d(output_size=(1, 1))
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (fc): Linear(in_features=512, out_features=10, bias=True)
+)
+2024-06-20 10:52:01,973 | INFO | 
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.0005
+)
+2024-06-20 10:52:01,973 | INFO | 
+CrossEntropyLoss()
+2024-06-20 11:05:24,987 | INFO | cuda:0 epoch: 1/50 train_loss: 0.3554 valid_loss: 0.3382 epoch_time: 798.751 sec
+2024-06-20 11:18:04,086 | INFO | cuda:0 epoch: 2/50 train_loss: 0.2788 valid_loss: 0.2915 epoch_time: 759.092 sec
+2024-06-20 11:30:44,521 | INFO | cuda:0 epoch: 3/50 train_loss: 0.2490 valid_loss: 0.3231 epoch_time: 760.429 sec
+2024-06-20 11:43:14,850 | INFO | cuda:0 epoch: 4/50 train_loss: 0.2353 valid_loss: 0.2114 epoch_time: 750.327 sec
+2024-06-20 11:56:08,425 | INFO | cuda:0 epoch: 5/50 train_loss: 0.2282 valid_loss: 0.2167 epoch_time: 773.574 sec
+2024-06-20 12:08:53,904 | INFO | cuda:0 epoch: 6/50 train_loss: 0.2235 valid_loss: 0.2407 epoch_time: 765.478 sec
+2024-06-20 12:21:44,891 | INFO | cuda:0 epoch: 7/50 train_loss: 0.2174 valid_loss: 0.2335 epoch_time: 770.982 sec
+2024-06-20 12:34:32,814 | INFO | cuda:0 epoch: 8/50 train_loss: 0.2167 valid_loss: 0.2228 epoch_time: 767.921 sec
+2024-06-20 12:47:14,708 | INFO | cuda:0 epoch: 9/50 train_loss: 0.2120 valid_loss: 0.2393 epoch_time: 761.893 sec
+2024-06-20 13:00:14,862 | INFO | cuda:0 epoch: 10/50 train_loss: 0.2111 valid_loss: 0.2184 epoch_time: 780.151 sec
+2024-06-20 13:12:55,542 | INFO | cuda:0 epoch: 11/50 train_loss: 0.2077 valid_loss: 0.2201 epoch_time: 760.679 sec
+2024-06-20 13:25:24,884 | INFO | cuda:0 epoch: 12/50 train_loss: 0.2067 valid_loss: 0.2040 epoch_time: 749.337 sec
+2024-06-20 13:37:49,407 | INFO | cuda:0 epoch: 13/50 train_loss: 0.2067 valid_loss: 0.1890 epoch_time: 744.521 sec
+2024-06-20 13:50:25,369 | INFO | cuda:0 epoch: 14/50 train_loss: 0.2060 valid_loss: 0.2122 epoch_time: 755.962 sec
+2024-06-20 14:03:00,780 | INFO | cuda:0 epoch: 15/50 train_loss: 0.2035 valid_loss: 0.1907 epoch_time: 755.410 sec
+2024-06-20 14:15:29,386 | INFO | cuda:0 epoch: 16/50 train_loss: 0.2032 valid_loss: 0.1836 epoch_time: 748.604 sec
+2024-06-20 14:28:02,629 | INFO | cuda:0 epoch: 17/50 train_loss: 0.2017 valid_loss: 0.2131 epoch_time: 753.241 sec
+2024-06-20 14:40:34,543 | INFO | cuda:0 epoch: 18/50 train_loss: 0.2015 valid_loss: 0.2554 epoch_time: 751.914 sec
+2024-06-20 14:53:42,060 | INFO | cuda:0 epoch: 19/50 train_loss: 0.2028 valid_loss: 0.2165 epoch_time: 787.513 sec
+2024-06-20 15:06:15,577 | INFO | cuda:0 epoch: 20/50 train_loss: 0.2017 valid_loss: 0.3249 epoch_time: 753.507 sec
+2024-06-20 15:18:55,709 | INFO | cuda:0 epoch: 21/50 train_loss: 0.2002 valid_loss: 0.2254 epoch_time: 760.129 sec
+2024-06-20 15:31:21,216 | INFO | cuda:0 epoch: 22/50 train_loss: 0.1989 valid_loss: 0.1931 epoch_time: 745.506 sec
+2024-06-20 15:43:44,099 | INFO | cuda:0 epoch: 23/50 train_loss: 0.1995 valid_loss: 0.1858 epoch_time: 742.882 sec
+2024-06-20 15:56:19,828 | INFO | cuda:0 epoch: 24/50 train_loss: 0.1985 valid_loss: 0.2111 epoch_time: 755.728 sec
+2024-06-20 16:08:44,161 | INFO | cuda:0 epoch: 25/50 train_loss: 0.1972 valid_loss: 0.2067 epoch_time: 744.332 sec
+2024-06-20 16:21:32,496 | INFO | cuda:0 epoch: 26/50 train_loss: 0.1961 valid_loss: 0.2608 epoch_time: 768.334 sec
+2024-06-20 16:33:59,303 | INFO | cuda:0 epoch: 27/50 train_loss: 0.1987 valid_loss: 0.2379 epoch_time: 746.802 sec
+2024-06-20 16:46:38,678 | INFO | cuda:0 epoch: 28/50 train_loss: 0.1980 valid_loss: 0.2076 epoch_time: 759.375 sec
+2024-06-20 16:59:32,130 | INFO | cuda:0 epoch: 29/50 train_loss: 0.1972 valid_loss: 0.1850 epoch_time: 773.451 sec
+2024-06-20 17:12:02,130 | INFO | cuda:0 epoch: 30/50 train_loss: 0.1953 valid_loss: 0.2376 epoch_time: 749.994 sec
+2024-06-20 17:24:36,542 | INFO | cuda:0 epoch: 31/50 train_loss: 0.1944 valid_loss: 0.2438 epoch_time: 754.412 sec
+2024-06-20 17:37:00,501 | INFO | cuda:0 epoch: 32/50 train_loss: 0.1955 valid_loss: 0.1894 epoch_time: 743.958 sec
+2024-06-20 17:49:31,809 | INFO | cuda:0 epoch: 33/50 train_loss: 0.1949 valid_loss: 0.1862 epoch_time: 751.307 sec
+2024-06-20 18:02:00,790 | INFO | cuda:0 epoch: 34/50 train_loss: 0.1959 valid_loss: 0.1765 epoch_time: 748.975 sec
+2024-06-20 18:14:47,654 | INFO | cuda:0 epoch: 35/50 train_loss: 0.1938 valid_loss: 0.1897 epoch_time: 766.857 sec
+2024-06-20 18:27:13,511 | INFO | cuda:0 epoch: 36/50 train_loss: 0.1957 valid_loss: 0.2197 epoch_time: 745.856 sec
+2024-06-20 18:39:43,803 | INFO | cuda:0 epoch: 37/50 train_loss: 0.1947 valid_loss: 0.1967 epoch_time: 750.291 sec
+2024-06-20 18:52:16,146 | INFO | cuda:0 epoch: 38/50 train_loss: 0.1945 valid_loss: 0.1947 epoch_time: 752.342 sec
+2024-06-20 19:04:37,839 | INFO | cuda:0 epoch: 39/50 train_loss: 0.1938 valid_loss: 0.2076 epoch_time: 741.692 sec
+2024-06-20 19:17:13,187 | INFO | cuda:0 epoch: 40/50 train_loss: 0.1936 valid_loss: 0.1974 epoch_time: 755.347 sec
+2024-06-20 19:28:47,259 | INFO | cuda:0 epoch: 41/50 train_loss: 0.1941 valid_loss: 0.1782 epoch_time: 694.071 sec
+2024-06-20 19:40:19,627 | INFO | cuda:0 epoch: 42/50 train_loss: 0.1939 valid_loss: 0.2016 epoch_time: 692.367 sec
+2024-06-20 19:51:44,814 | INFO | cuda:0 epoch: 43/50 train_loss: 0.1931 valid_loss: 0.1887 epoch_time: 685.186 sec
+2024-06-20 20:03:27,254 | INFO | cuda:0 epoch: 44/50 train_loss: 0.1918 valid_loss: 0.2018 epoch_time: 702.435 sec
+2024-06-20 20:14:53,854 | INFO | cuda:0 epoch: 45/50 train_loss: 0.1929 valid_loss: 0.2442 epoch_time: 686.598 sec
+2024-06-20 20:26:09,752 | INFO | cuda:0 epoch: 46/50 train_loss: 0.1935 valid_loss: 0.1845 epoch_time: 675.893 sec
+2024-06-20 20:37:32,414 | INFO | cuda:0 epoch: 47/50 train_loss: 0.1929 valid_loss: 0.2040 epoch_time: 682.661 sec
+2024-06-20 20:48:52,572 | INFO | cuda:0 epoch: 48/50 train_loss: 0.1926 valid_loss: 0.1768 epoch_time: 680.157 sec
+2024-06-20 21:00:14,585 | INFO | cuda:0 epoch: 49/50 train_loss: 0.1915 valid_loss: 0.2427 epoch_time: 682.011 sec
+2024-06-20 21:11:45,905 | INFO | cuda:0 epoch: 50/50 train_loss: 0.1927 valid_loss: 0.3322 epoch_time: 691.319 sec
+2024-06-20 21:19:36,152 | INFO | 
+train_accuracy: 0.933 train_precision: 0.935 train_recall: 0.933 train_f1: 0.932 valid_accuracy: 0.930 valid_precision: 0.932 valid_recall: 0.930 valid_f1: 0.929 total_time: 37179.676 sec
+2024-06-21 20:45:59,390 | INFO | 
+model:
+  name: CancerResNet18
+  output_dim: 2
+  n_blocks: [2, 2, 2, 2]
+  n_channels: [64, 128, 256, 512]
+optimizer:
+  name: Adam
+  parameters:
+    lr: 0.001
+    weight_decay: 0.0005
+dataset:
+  name: cancer
+  data_dir: ./data
+  batch_size: 64
+  split:
+    train: 0.9
+    valid: 0.1
+    test: 1.0
+train:
+  epochs: 50
+  device: cuda:0
+  save_path: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+  save_every: 2
+test:
+  device: cuda:0
+  checkpoint: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+2024-06-21 20:45:59,391 | INFO | 
+CancerResNet(
+  (conv): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  (bn): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (act): ReLU()
+  (max_pool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (backbone): ResNetBase(
+    (blocks): Sequential(
+      (0): ResidualBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (1): ResidualBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (2): ResidualBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (3): ResidualBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (4): ResidualBlock(
+        (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (5): ResidualBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (6): ResidualBlock(
+        (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (7): ResidualBlock(
+        (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+    )
+  )
+  (avg_pool): AdaptiveAvgPool2d(output_size=(1, 1))
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (fc): Linear(in_features=512, out_features=2, bias=True)
+)
+2024-06-21 20:45:59,391 | INFO | 
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    initial_lr: 0.001
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.0005
+)
+2024-06-21 20:45:59,391 | INFO | 
+CrossEntropyLoss()
+2024-06-21 20:50:19,846 | INFO | 
+model:
+  name: CancerResNet18
+  output_dim: 2
+  n_blocks: [2, 2, 2, 2]
+  n_channels: [64, 128, 256, 512]
+optimizer:
+  name: Adam
+  parameters:
+    lr: 0.001
+    weight_decay: 0.0005
+dataset:
+  name: cancer
+  data_dir: ./data
+  batch_size: 64
+  split:
+    train: 0.9
+    valid: 0.1
+    test: 1.0
+train:
+  epochs: 50
+  device: cuda:0
+  save_path: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+  save_every: 2
+test:
+  device: cuda:0
+  checkpoint: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+2024-06-21 20:50:19,848 | INFO | 
+CancerResNet(
+  (conv): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  (bn): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (act): ReLU()
+  (max_pool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (backbone): ResNetBase(
+    (blocks): Sequential(
+      (0): ResidualBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (1): ResidualBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (2): ResidualBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (3): ResidualBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (4): ResidualBlock(
+        (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (5): ResidualBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (6): ResidualBlock(
+        (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (7): ResidualBlock(
+        (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+    )
+  )
+  (avg_pool): AdaptiveAvgPool2d(output_size=(1, 1))
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (fc): Linear(in_features=512, out_features=2, bias=True)
+)
+2024-06-21 20:50:19,848 | INFO | 
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    initial_lr: 0.001
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.0005
+)
+2024-06-21 20:50:19,848 | INFO | 
+CrossEntropyLoss()
+2024-06-21 21:03:14,302 | INFO | cuda:0 epoch: 1/50 train_loss: 0.3565 valid_loss: 0.3174 epoch_time: 769.849 sec
+2024-06-21 21:03:43,364 | INFO | 
+model:
+  name: CancerResNet18
+  output_dim: 2
+  n_blocks: [2, 2, 2, 2]
+  n_channels: [64, 128, 256, 512]
+optimizer:
+  name: Adam
+  parameters:
+    lr: 0.001
+    weight_decay: 0.0005
+dataset:
+  name: cancer
+  data_dir: ./data
+  batch_size: 64
+  split:
+    train: 0.9
+    valid: 0.1
+    test: 1.0
+train:
+  epochs: 50
+  device: cuda:0
+  save_path: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+  save_every: 2
+test:
+  device: cuda:0
+  checkpoint: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+2024-06-21 21:03:43,365 | INFO | 
+CancerResNet(
+  (conv): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+  (bn): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (act): ReLU()
+  (max_pool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (backbone): ResNetBase(
+    (blocks): Sequential(
+      (0): ResidualBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (1): ResidualBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (2): ResidualBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (3): ResidualBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (4): ResidualBlock(
+        (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (5): ResidualBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+      (6): ResidualBlock(
+        (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): ShortcutProjection(
+          (conv): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2))
+          (bn): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act2): ReLU()
+      )
+      (7): ResidualBlock(
+        (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (act1): ReLU()
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (shortcut): Identity()
+        (act2): ReLU()
+      )
+    )
+  )
+  (avg_pool): AdaptiveAvgPool2d(output_size=(1, 1))
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (fc): Linear(in_features=512, out_features=2, bias=True)
+)
+2024-06-21 21:03:43,365 | INFO | 
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    initial_lr: 0.001
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.0005
+)
+2024-06-21 21:03:43,365 | INFO | 
+CrossEntropyLoss()
+2024-06-21 21:16:22,747 | INFO | cuda:0 epoch: 1/50 train_loss: 0.3526 valid_loss: 0.2951 train_acc: 0.8479 valid_acc: 0.8809 epoch_time: 755.243 sec
+2024-06-21 21:28:31,149 | INFO | cuda:0 epoch: 2/50 train_loss: 0.2766 valid_loss: 0.2353 train_acc: 0.8861 valid_acc: 0.9042 epoch_time: 728.401 sec
+2024-06-21 21:40:45,126 | INFO | cuda:0 epoch: 3/50 train_loss: 0.2500 valid_loss: 0.2643 train_acc: 0.8986 valid_acc: 0.8919 epoch_time: 733.974 sec
+2024-06-21 21:52:54,370 | INFO | cuda:0 epoch: 4/50 train_loss: 0.2350 valid_loss: 0.2612 train_acc: 0.9059 valid_acc: 0.8922 epoch_time: 729.240 sec
+2024-06-21 22:05:06,162 | INFO | cuda:0 epoch: 5/50 train_loss: 0.2265 valid_loss: 0.2085 train_acc: 0.9101 valid_acc: 0.9213 epoch_time: 731.789 sec
+2024-06-21 22:17:03,470 | INFO | cuda:0 epoch: 6/50 train_loss: 0.2200 valid_loss: 0.2552 train_acc: 0.9128 valid_acc: 0.8893 epoch_time: 717.307 sec
+2024-06-21 22:29:29,343 | INFO | cuda:0 epoch: 7/50 train_loss: 0.2156 valid_loss: 0.2155 train_acc: 0.9153 valid_acc: 0.9165 epoch_time: 745.871 sec
+2024-06-21 22:41:37,832 | INFO | cuda:0 epoch: 8/50 train_loss: 0.2131 valid_loss: 0.2742 train_acc: 0.9155 valid_acc: 0.8850 epoch_time: 728.485 sec
+2024-06-21 22:54:06,458 | INFO | cuda:0 epoch: 9/50 train_loss: 0.2107 valid_loss: 0.1956 train_acc: 0.9170 valid_acc: 0.9245 epoch_time: 748.624 sec
+2024-06-21 23:06:14,422 | INFO | cuda:0 epoch: 10/50 train_loss: 0.2087 valid_loss: 0.2160 train_acc: 0.9184 valid_acc: 0.9144 epoch_time: 727.951 sec
+2024-06-21 23:18:51,136 | INFO | cuda:0 epoch: 11/50 train_loss: 0.1915 valid_loss: 0.1922 train_acc: 0.9263 valid_acc: 0.9242 epoch_time: 756.711 sec
+2024-06-21 23:31:14,509 | INFO | cuda:0 epoch: 12/50 train_loss: 0.1864 valid_loss: 0.1721 train_acc: 0.9276 valid_acc: 0.9367 epoch_time: 743.370 sec
+2024-06-21 23:43:49,895 | INFO | cuda:0 epoch: 13/50 train_loss: 0.1835 valid_loss: 0.1750 train_acc: 0.9296 valid_acc: 0.9332 epoch_time: 755.385 sec
+2024-06-21 23:56:41,175 | INFO | cuda:0 epoch: 14/50 train_loss: 0.1829 valid_loss: 0.2012 train_acc: 0.9293 valid_acc: 0.9225 epoch_time: 771.270 sec
+2024-06-22 00:08:59,409 | INFO | cuda:0 epoch: 15/50 train_loss: 0.1819 valid_loss: 0.1974 train_acc: 0.9297 valid_acc: 0.9241 epoch_time: 738.231 sec
+2024-06-22 00:21:09,470 | INFO | cuda:0 epoch: 16/50 train_loss: 0.1800 valid_loss: 0.1693 train_acc: 0.9308 valid_acc: 0.9376 epoch_time: 730.059 sec
+2024-06-22 00:33:24,699 | INFO | cuda:0 epoch: 17/50 train_loss: 0.1802 valid_loss: 0.1966 train_acc: 0.9311 valid_acc: 0.9217 epoch_time: 735.222 sec
+2024-06-22 00:45:35,449 | INFO | cuda:0 epoch: 18/50 train_loss: 0.1793 valid_loss: 0.1662 train_acc: 0.9315 valid_acc: 0.9384 epoch_time: 730.749 sec
+2024-06-22 00:58:17,344 | INFO | cuda:0 epoch: 19/50 train_loss: 0.1784 valid_loss: 0.1631 train_acc: 0.9316 valid_acc: 0.9374 epoch_time: 761.894 sec
+2024-06-22 01:10:25,734 | INFO | cuda:0 epoch: 20/50 train_loss: 0.1766 valid_loss: 0.1680 train_acc: 0.9323 valid_acc: 0.9366 epoch_time: 728.378 sec
+2024-06-22 01:22:41,606 | INFO | cuda:0 epoch: 21/50 train_loss: 0.1650 valid_loss: 0.1638 train_acc: 0.9373 valid_acc: 0.9393 epoch_time: 735.869 sec
+2024-06-22 01:34:41,598 | INFO | cuda:0 epoch: 22/50 train_loss: 0.1631 valid_loss: 0.1519 train_acc: 0.9379 valid_acc: 0.9439 epoch_time: 719.991 sec
+2024-06-22 01:46:39,508 | INFO | cuda:0 epoch: 23/50 train_loss: 0.1614 valid_loss: 0.1532 train_acc: 0.9387 valid_acc: 0.9419 epoch_time: 717.909 sec
+2024-06-22 01:58:45,027 | INFO | cuda:0 epoch: 24/50 train_loss: 0.1595 valid_loss: 0.1520 train_acc: 0.9394 valid_acc: 0.9443 epoch_time: 725.517 sec
+2024-06-22 02:10:41,154 | INFO | cuda:0 epoch: 25/50 train_loss: 0.1583 valid_loss: 0.1516 train_acc: 0.9404 valid_acc: 0.9439 epoch_time: 716.126 sec
+2024-06-22 02:22:50,867 | INFO | cuda:0 epoch: 26/50 train_loss: 0.1584 valid_loss: 0.1487 train_acc: 0.9399 valid_acc: 0.9446 epoch_time: 729.712 sec
+2024-06-22 02:34:56,437 | INFO | cuda:0 epoch: 27/50 train_loss: 0.1584 valid_loss: 0.1505 train_acc: 0.9399 valid_acc: 0.9435 epoch_time: 725.569 sec
+2024-06-22 02:47:04,130 | INFO | cuda:0 epoch: 28/50 train_loss: 0.1581 valid_loss: 0.1563 train_acc: 0.9400 valid_acc: 0.9414 epoch_time: 727.693 sec
+2024-06-22 02:58:58,304 | INFO | cuda:0 epoch: 29/50 train_loss: 0.1581 valid_loss: 0.1483 train_acc: 0.9405 valid_acc: 0.9452 epoch_time: 714.174 sec
+2024-06-22 03:11:01,455 | INFO | cuda:0 epoch: 30/50 train_loss: 0.1566 valid_loss: 0.1515 train_acc: 0.9408 valid_acc: 0.9442 epoch_time: 723.150 sec
+2024-06-22 03:23:04,779 | INFO | cuda:0 epoch: 31/50 train_loss: 0.1477 valid_loss: 0.1394 train_acc: 0.9444 valid_acc: 0.9486 epoch_time: 723.323 sec
+2024-06-22 03:35:08,568 | INFO | cuda:0 epoch: 32/50 train_loss: 0.1463 valid_loss: 0.1419 train_acc: 0.9452 valid_acc: 0.9474 epoch_time: 723.787 sec
+2024-06-22 03:47:13,941 | INFO | cuda:0 epoch: 33/50 train_loss: 0.1463 valid_loss: 0.1383 train_acc: 0.9457 valid_acc: 0.9489 epoch_time: 725.369 sec
+2024-06-22 03:59:14,176 | INFO | cuda:0 epoch: 34/50 train_loss: 0.1446 valid_loss: 0.1394 train_acc: 0.9456 valid_acc: 0.9484 epoch_time: 720.235 sec
+2024-06-22 04:11:16,799 | INFO | cuda:0 epoch: 35/50 train_loss: 0.1456 valid_loss: 0.1348 train_acc: 0.9455 valid_acc: 0.9505 epoch_time: 722.622 sec
+2024-06-22 04:23:12,237 | INFO | cuda:0 epoch: 36/50 train_loss: 0.1440 valid_loss: 0.1387 train_acc: 0.9464 valid_acc: 0.9490 epoch_time: 715.438 sec
+2024-06-22 04:35:26,712 | INFO | cuda:0 epoch: 37/50 train_loss: 0.1443 valid_loss: 0.1428 train_acc: 0.9459 valid_acc: 0.9460 epoch_time: 734.474 sec
+2024-06-22 04:47:29,427 | INFO | cuda:0 epoch: 38/50 train_loss: 0.1434 valid_loss: 0.1440 train_acc: 0.9466 valid_acc: 0.9457 epoch_time: 722.713 sec
+2024-06-22 04:59:28,496 | INFO | cuda:0 epoch: 39/50 train_loss: 0.1431 valid_loss: 0.1384 train_acc: 0.9465 valid_acc: 0.9483 epoch_time: 719.064 sec
+2024-06-22 05:11:33,409 | INFO | cuda:0 epoch: 40/50 train_loss: 0.1431 valid_loss: 0.1330 train_acc: 0.9461 valid_acc: 0.9494 epoch_time: 724.912 sec
+2024-06-22 05:23:34,964 | INFO | cuda:0 epoch: 41/50 train_loss: 0.1375 valid_loss: 0.1331 train_acc: 0.9488 valid_acc: 0.9514 epoch_time: 721.554 sec
+2024-06-22 05:35:37,672 | INFO | cuda:0 epoch: 42/50 train_loss: 0.1359 valid_loss: 0.1281 train_acc: 0.9491 valid_acc: 0.9533 epoch_time: 722.705 sec
+2024-06-22 05:47:21,900 | INFO | cuda:0 epoch: 43/50 train_loss: 0.1368 valid_loss: 0.1352 train_acc: 0.9489 valid_acc: 0.9509 epoch_time: 704.225 sec
+2024-06-22 05:58:34,477 | INFO | cuda:0 epoch: 44/50 train_loss: 0.1349 valid_loss: 0.1279 train_acc: 0.9494 valid_acc: 0.9525 epoch_time: 672.574 sec
+2024-06-22 06:09:42,709 | INFO | cuda:0 epoch: 45/50 train_loss: 0.1351 valid_loss: 0.1281 train_acc: 0.9499 valid_acc: 0.9537 epoch_time: 668.224 sec
+2024-06-22 06:20:43,475 | INFO | cuda:0 epoch: 46/50 train_loss: 0.1343 valid_loss: 0.1391 train_acc: 0.9504 valid_acc: 0.9501 epoch_time: 660.764 sec
+2024-06-22 06:31:51,111 | INFO | cuda:0 epoch: 47/50 train_loss: 0.1350 valid_loss: 0.1253 train_acc: 0.9493 valid_acc: 0.9538 epoch_time: 667.636 sec
+2024-06-22 06:43:03,411 | INFO | cuda:0 epoch: 48/50 train_loss: 0.1338 valid_loss: 0.1279 train_acc: 0.9502 valid_acc: 0.9533 epoch_time: 672.299 sec
+2024-06-22 06:54:15,894 | INFO | cuda:0 epoch: 49/50 train_loss: 0.1337 valid_loss: 0.1283 train_acc: 0.9506 valid_acc: 0.9532 epoch_time: 672.482 sec
+2024-06-22 07:05:19,134 | INFO | cuda:0 epoch: 50/50 train_loss: 0.1340 valid_loss: 0.1306 train_acc: 0.9500 valid_acc: 0.9508 epoch_time: 663.236 sec
+2024-06-22 07:13:17,348 | INFO | 
+train_accuracy: 0.956 train_precision: 0.957 train_recall: 0.956 train_f1: 0.956 valid_accuracy: 0.953 valid_precision: 0.955 valid_recall: 0.953 valid_f1: 0.953 total_time: 36091.643 sec

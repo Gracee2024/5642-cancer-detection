@@ -1,0 +1,9 @@
+model:
+  name: CancerResNet18
+  output_dim: 2
+  n_blocks: [2, 2, 2, 2]
+  n_channels: [64, 128, 256, 512]
+datasets: cancer
+device: cuda:0
+save_path: ./checkpoints/
+data_dir: ./data

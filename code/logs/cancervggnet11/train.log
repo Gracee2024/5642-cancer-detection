@@ -1,0 +1,452 @@
+2024-06-21 20:45:38,183 | INFO | 
+model:
+  name: CancerVGGNet11
+  output_dim: 2
+  n_blocks: [1, 1, 2, 2, 2]
+  n_channels: [64, 128, 256, 512, 512]
+optimizer:
+  name: Adam
+  parameters:
+    lr: 0.001
+    weight_decay: 0.0005
+dataset:
+  name: cancer
+  data_dir: ./data
+  batch_size: 64
+  split:
+    train: 0.9
+    valid: 0.1
+    test: 1.0
+train:
+  epochs: 50
+  device: cuda:0
+  save_path: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+  save_every: 2
+test:
+  device: cuda:0
+  checkpoint: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+2024-06-21 20:45:38,184 | INFO | 
+CancerVGGNet(
+  (backbone): VGGBase(
+    (blocks): Sequential(
+      (0): VGGBlock(
+        (conv): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (1): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (2): VGGBlock(
+        (conv): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (3): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (4): VGGBlock(
+        (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (5): VGGBlock(
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (6): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (7): VGGBlock(
+        (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (8): VGGBlock(
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (9): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (10): VGGBlock(
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (11): VGGBlock(
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (12): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+    )
+  )
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (fc1): LazyLinear(in_features=0, out_features=4096, bias=True)
+  (act1): ReLU()
+  (dropout1): Dropout(p=0.5, inplace=False)
+  (fc2): LazyLinear(in_features=0, out_features=4096, bias=True)
+  (act2): ReLU()
+  (dropout2): Dropout(p=0.5, inplace=False)
+  (fc3): LazyLinear(in_features=0, out_features=2, bias=True)
+)
+2024-06-21 20:45:38,184 | INFO | 
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    initial_lr: 0.001
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.0005
+)
+2024-06-21 20:45:38,184 | INFO | 
+CrossEntropyLoss()
+2024-06-21 20:48:06,401 | INFO | 
+model:
+  name: CancerVGGNet11
+  output_dim: 2
+  n_blocks: [1, 1, 2, 2, 2]
+  n_channels: [64, 128, 256, 512, 512]
+optimizer:
+  name: Adam
+  parameters:
+    lr: 0.001
+    weight_decay: 0.0005
+dataset:
+  name: cancer
+  data_dir: ./data
+  batch_size: 256
+  split:
+    train: 0.9
+    valid: 0.1
+    test: 1.0
+train:
+  epochs: 50
+  device: cuda:0
+  save_path: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+  save_every: 2
+test:
+  device: cuda:0
+  checkpoint: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+2024-06-21 20:48:06,402 | INFO | 
+CancerVGGNet(
+  (backbone): VGGBase(
+    (blocks): Sequential(
+      (0): VGGBlock(
+        (conv): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (1): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (2): VGGBlock(
+        (conv): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (3): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (4): VGGBlock(
+        (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (5): VGGBlock(
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (6): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (7): VGGBlock(
+        (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (8): VGGBlock(
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (9): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (10): VGGBlock(
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (11): VGGBlock(
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (12): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+    )
+  )
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (fc1): LazyLinear(in_features=0, out_features=4096, bias=True)
+  (act1): ReLU()
+  (dropout1): Dropout(p=0.5, inplace=False)
+  (fc2): LazyLinear(in_features=0, out_features=4096, bias=True)
+  (act2): ReLU()
+  (dropout2): Dropout(p=0.5, inplace=False)
+  (fc3): LazyLinear(in_features=0, out_features=2, bias=True)
+)
+2024-06-21 20:48:06,402 | INFO | 
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    initial_lr: 0.001
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.0005
+)
+2024-06-21 20:48:06,402 | INFO | 
+CrossEntropyLoss()
+2024-06-21 20:50:07,089 | INFO | 
+model:
+  name: CancerVGGNet11
+  output_dim: 2
+  n_blocks: [1, 1, 2, 2, 2]
+  n_channels: [64, 128, 256, 512, 512]
+optimizer:
+  name: Adam
+  parameters:
+    lr: 0.001
+    weight_decay: 0.0005
+dataset:
+  name: cancer
+  data_dir: ./data
+  batch_size: 64
+  split:
+    train: 0.9
+    valid: 0.1
+    test: 1.0
+train:
+  epochs: 50
+  device: cuda:0
+  save_path: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+  save_every: 2
+test:
+  device: cuda:0
+  checkpoint: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+2024-06-21 20:50:07,090 | INFO | 
+CancerVGGNet(
+  (backbone): VGGBase(
+    (blocks): Sequential(
+      (0): VGGBlock(
+        (conv): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (1): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (2): VGGBlock(
+        (conv): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (3): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (4): VGGBlock(
+        (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (5): VGGBlock(
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (6): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (7): VGGBlock(
+        (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (8): VGGBlock(
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (9): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (10): VGGBlock(
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (11): VGGBlock(
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (12): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+    )
+  )
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (fc1): LazyLinear(in_features=0, out_features=4096, bias=True)
+  (act1): ReLU()
+  (dropout1): Dropout(p=0.5, inplace=False)
+  (fc2): LazyLinear(in_features=0, out_features=4096, bias=True)
+  (act2): ReLU()
+  (dropout2): Dropout(p=0.5, inplace=False)
+  (fc3): LazyLinear(in_features=0, out_features=2, bias=True)
+)
+2024-06-21 20:50:07,090 | INFO | 
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    initial_lr: 0.001
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.0005
+)
+2024-06-21 20:50:07,090 | INFO | 
+CrossEntropyLoss()
+2024-06-21 21:03:36,868 | INFO | 
+model:
+  name: CancerVGGNet11
+  output_dim: 2
+  n_blocks: [1, 1, 2, 2, 2]
+  n_channels: [64, 128, 256, 512, 512]
+optimizer:
+  name: Adam
+  parameters:
+    lr: 0.001
+    weight_decay: 0.0005
+dataset:
+  name: cancer
+  data_dir: ./data
+  batch_size: 64
+  split:
+    train: 0.9
+    valid: 0.1
+    test: 1.0
+train:
+  epochs: 50
+  device: cuda:0
+  save_path: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+  save_every: 2
+test:
+  device: cuda:0
+  checkpoint: ./checkpoints/
+  log_path: ./logs/
+  seed: 42
+2024-06-21 21:03:36,869 | INFO | 
+CancerVGGNet(
+  (backbone): VGGBase(
+    (blocks): Sequential(
+      (0): VGGBlock(
+        (conv): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (1): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (2): VGGBlock(
+        (conv): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (3): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (4): VGGBlock(
+        (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (5): VGGBlock(
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (6): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (7): VGGBlock(
+        (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (8): VGGBlock(
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (9): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (10): VGGBlock(
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (11): VGGBlock(
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (act): ReLU()
+      )
+      (12): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+    )
+  )
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (fc1): LazyLinear(in_features=0, out_features=4096, bias=True)
+  (act1): ReLU()
+  (dropout1): Dropout(p=0.5, inplace=False)
+  (fc2): LazyLinear(in_features=0, out_features=4096, bias=True)
+  (act2): ReLU()
+  (dropout2): Dropout(p=0.5, inplace=False)
+  (fc3): LazyLinear(in_features=0, out_features=2, bias=True)
+)
+2024-06-21 21:03:36,869 | INFO | 
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    initial_lr: 0.001
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.0005
+)
+2024-06-21 21:03:36,869 | INFO | 
+CrossEntropyLoss()
+2024-06-21 21:21:26,578 | INFO | cuda:0 epoch: 1/50 train_loss: 0.4055 valid_loss: 0.3485 train_acc: 0.8180 valid_acc: 0.8484 epoch_time: 1065.446 sec
+2024-06-21 21:38:48,769 | INFO | cuda:0 epoch: 2/50 train_loss: 0.3382 valid_loss: 0.3169 train_acc: 0.8570 valid_acc: 0.8675 epoch_time: 1042.191 sec
+2024-06-21 21:55:56,683 | INFO | cuda:0 epoch: 3/50 train_loss: 0.3178 valid_loss: 0.3235 train_acc: 0.8677 valid_acc: 0.8627 epoch_time: 1027.910 sec
+2024-06-21 22:13:10,962 | INFO | cuda:0 epoch: 4/50 train_loss: 0.3034 valid_loss: 0.2852 train_acc: 0.8750 valid_acc: 0.8843 epoch_time: 1034.278 sec
+2024-06-21 22:30:24,716 | INFO | cuda:0 epoch: 5/50 train_loss: 0.2910 valid_loss: 0.2790 train_acc: 0.8805 valid_acc: 0.8785 epoch_time: 1033.752 sec
+2024-06-21 22:47:39,429 | INFO | cuda:0 epoch: 6/50 train_loss: 0.2848 valid_loss: 0.2917 train_acc: 0.8835 valid_acc: 0.8793 epoch_time: 1034.711 sec
+2024-06-21 23:05:08,175 | INFO | cuda:0 epoch: 7/50 train_loss: 0.2790 valid_loss: 0.2677 train_acc: 0.8862 valid_acc: 0.8883 epoch_time: 1048.744 sec
+2024-06-21 23:22:39,616 | INFO | cuda:0 epoch: 8/50 train_loss: 0.2749 valid_loss: 0.2532 train_acc: 0.8880 valid_acc: 0.8975 epoch_time: 1051.438 sec
+2024-06-21 23:40:07,555 | INFO | cuda:0 epoch: 9/50 train_loss: 0.2684 valid_loss: 0.2917 train_acc: 0.8914 valid_acc: 0.8810 epoch_time: 1047.937 sec
+2024-06-21 23:58:06,011 | INFO | cuda:0 epoch: 10/50 train_loss: 0.2649 valid_loss: 0.2671 train_acc: 0.8924 valid_acc: 0.8862 epoch_time: 1078.452 sec
+2024-06-22 00:15:36,017 | INFO | cuda:0 epoch: 11/50 train_loss: 0.2438 valid_loss: 0.2332 train_acc: 0.9018 valid_acc: 0.9085 epoch_time: 1050.005 sec
+2024-06-22 00:32:53,304 | INFO | cuda:0 epoch: 12/50 train_loss: 0.2393 valid_loss: 0.2264 train_acc: 0.9037 valid_acc: 0.9106 epoch_time: 1037.286 sec
+2024-06-22 00:50:13,517 | INFO | cuda:0 epoch: 13/50 train_loss: 0.2376 valid_loss: 0.2321 train_acc: 0.9041 valid_acc: 0.9036 epoch_time: 1040.212 sec
+2024-06-22 01:07:54,896 | INFO | cuda:0 epoch: 14/50 train_loss: 0.2354 valid_loss: 0.2252 train_acc: 0.9057 valid_acc: 0.9095 epoch_time: 1061.375 sec
+2024-06-22 01:25:08,411 | INFO | cuda:0 epoch: 15/50 train_loss: 0.2333 valid_loss: 0.2207 train_acc: 0.9067 valid_acc: 0.9124 epoch_time: 1033.507 sec
+2024-06-22 01:42:37,460 | INFO | cuda:0 epoch: 16/50 train_loss: 0.2318 valid_loss: 0.2191 train_acc: 0.9075 valid_acc: 0.9137 epoch_time: 1049.047 sec
+2024-06-22 01:59:48,149 | INFO | cuda:0 epoch: 17/50 train_loss: 0.2304 valid_loss: 0.2425 train_acc: 0.9084 valid_acc: 0.9029 epoch_time: 1030.686 sec
+2024-06-22 02:17:09,699 | INFO | cuda:0 epoch: 18/50 train_loss: 0.2297 valid_loss: 0.2306 train_acc: 0.9085 valid_acc: 0.9074 epoch_time: 1041.549 sec
+2024-06-22 02:34:31,982 | INFO | cuda:0 epoch: 19/50 train_loss: 0.2268 valid_loss: 0.2160 train_acc: 0.9102 valid_acc: 0.9121 epoch_time: 1042.279 sec
+2024-06-22 02:51:45,441 | INFO | cuda:0 epoch: 20/50 train_loss: 0.2262 valid_loss: 0.2133 train_acc: 0.9101 valid_acc: 0.9167 epoch_time: 1033.447 sec
+2024-06-22 03:09:09,130 | INFO | cuda:0 epoch: 21/50 train_loss: 0.2129 valid_loss: 0.2090 train_acc: 0.9162 valid_acc: 0.9168 epoch_time: 1043.687 sec
+2024-06-22 03:26:25,750 | INFO | cuda:0 epoch: 22/50 train_loss: 0.2109 valid_loss: 0.2109 train_acc: 0.9169 valid_acc: 0.9187 epoch_time: 1036.620 sec
+2024-06-22 03:43:50,305 | INFO | cuda:0 epoch: 23/50 train_loss: 0.2103 valid_loss: 0.2099 train_acc: 0.9171 valid_acc: 0.9180 epoch_time: 1044.553 sec
+2024-06-22 04:01:02,966 | INFO | cuda:0 epoch: 24/50 train_loss: 0.2094 valid_loss: 0.2072 train_acc: 0.9177 valid_acc: 0.9188 epoch_time: 1032.650 sec
+2024-06-22 04:18:23,806 | INFO | cuda:0 epoch: 25/50 train_loss: 0.2078 valid_loss: 0.2065 train_acc: 0.9185 valid_acc: 0.9195 epoch_time: 1040.839 sec
+2024-06-22 04:35:50,270 | INFO | cuda:0 epoch: 26/50 train_loss: 0.2064 valid_loss: 0.2041 train_acc: 0.9189 valid_acc: 0.9208 epoch_time: 1046.462 sec
+2024-06-22 04:53:09,396 | INFO | cuda:0 epoch: 27/50 train_loss: 0.2068 valid_loss: 0.2060 train_acc: 0.9185 valid_acc: 0.9180 epoch_time: 1039.122 sec
+2024-06-22 05:10:27,208 | INFO | cuda:0 epoch: 28/50 train_loss: 0.2048 valid_loss: 0.2007 train_acc: 0.9197 valid_acc: 0.9231 epoch_time: 1037.809 sec
+2024-06-22 05:27:45,356 | INFO | cuda:0 epoch: 29/50 train_loss: 0.2040 valid_loss: 0.1972 train_acc: 0.9195 valid_acc: 0.9240 epoch_time: 1038.146 sec
+2024-06-22 05:44:47,901 | INFO | cuda:0 epoch: 30/50 train_loss: 0.2034 valid_loss: 0.1908 train_acc: 0.9204 valid_acc: 0.9245 epoch_time: 1022.543 sec
+2024-06-22 06:00:15,971 | INFO | cuda:0 epoch: 31/50 train_loss: 0.1945 valid_loss: 0.2045 train_acc: 0.9239 valid_acc: 0.9182 epoch_time: 928.067 sec
+2024-06-22 06:15:39,973 | INFO | cuda:0 epoch: 32/50 train_loss: 0.1926 valid_loss: 0.1884 train_acc: 0.9250 valid_acc: 0.9248 epoch_time: 923.997 sec
+2024-06-22 06:30:55,340 | INFO | cuda:0 epoch: 33/50 train_loss: 0.1910 valid_loss: 0.1867 train_acc: 0.9257 valid_acc: 0.9263 epoch_time: 915.365 sec
+2024-06-22 06:46:15,486 | INFO | cuda:0 epoch: 34/50 train_loss: 0.1902 valid_loss: 0.1836 train_acc: 0.9258 valid_acc: 0.9288 epoch_time: 920.145 sec
+2024-06-22 07:01:31,338 | INFO | cuda:0 epoch: 35/50 train_loss: 0.1893 valid_loss: 0.1816 train_acc: 0.9267 valid_acc: 0.9284 epoch_time: 915.850 sec
+2024-06-22 07:15:48,290 | INFO | cuda:0 epoch: 36/50 train_loss: 0.1877 valid_loss: 0.1896 train_acc: 0.9273 valid_acc: 0.9273 epoch_time: 856.950 sec
+2024-06-22 07:29:06,876 | INFO | cuda:0 epoch: 37/50 train_loss: 0.1880 valid_loss: 0.1873 train_acc: 0.9273 valid_acc: 0.9279 epoch_time: 798.584 sec
+2024-06-22 07:42:27,748 | INFO | cuda:0 epoch: 38/50 train_loss: 0.1855 valid_loss: 0.1840 train_acc: 0.9286 valid_acc: 0.9283 epoch_time: 800.871 sec
+2024-06-22 07:55:36,515 | INFO | cuda:0 epoch: 39/50 train_loss: 0.1852 valid_loss: 0.1820 train_acc: 0.9284 valid_acc: 0.9297 epoch_time: 788.763 sec
+2024-06-22 08:08:50,532 | INFO | cuda:0 epoch: 40/50 train_loss: 0.1839 valid_loss: 0.1805 train_acc: 0.9290 valid_acc: 0.9298 epoch_time: 794.015 sec
+2024-06-22 08:21:59,835 | INFO | cuda:0 epoch: 41/50 train_loss: 0.1782 valid_loss: 0.1834 train_acc: 0.9314 valid_acc: 0.9293 epoch_time: 789.302 sec
+2024-06-22 08:35:14,826 | INFO | cuda:0 epoch: 42/50 train_loss: 0.1769 valid_loss: 0.1746 train_acc: 0.9317 valid_acc: 0.9324 epoch_time: 794.990 sec
+2024-06-22 08:48:39,697 | INFO | cuda:0 epoch: 43/50 train_loss: 0.1770 valid_loss: 0.1717 train_acc: 0.9322 valid_acc: 0.9322 epoch_time: 804.869 sec
+2024-06-22 09:01:49,407 | INFO | cuda:0 epoch: 44/50 train_loss: 0.1747 valid_loss: 0.1706 train_acc: 0.9329 valid_acc: 0.9349 epoch_time: 789.703 sec
+2024-06-22 09:15:07,148 | INFO | cuda:0 epoch: 45/50 train_loss: 0.1750 valid_loss: 0.1748 train_acc: 0.9326 valid_acc: 0.9315 epoch_time: 797.738 sec
+2024-06-22 09:28:21,680 | INFO | cuda:0 epoch: 46/50 train_loss: 0.1740 valid_loss: 0.1709 train_acc: 0.9332 valid_acc: 0.9335 epoch_time: 794.521 sec
+2024-06-22 09:41:37,767 | INFO | cuda:0 epoch: 47/50 train_loss: 0.1736 valid_loss: 0.1699 train_acc: 0.9334 valid_acc: 0.9349 epoch_time: 796.085 sec
+2024-06-22 09:54:55,583 | INFO | cuda:0 epoch: 48/50 train_loss: 0.1724 valid_loss: 0.1748 train_acc: 0.9338 valid_acc: 0.9320 epoch_time: 797.815 sec
+2024-06-22 10:08:10,019 | INFO | cuda:0 epoch: 49/50 train_loss: 0.1717 valid_loss: 0.1689 train_acc: 0.9339 valid_acc: 0.9362 epoch_time: 794.434 sec
+2024-06-22 10:21:26,151 | INFO | cuda:0 epoch: 50/50 train_loss: 0.1714 valid_loss: 0.1712 train_acc: 0.9340 valid_acc: 0.9336 epoch_time: 796.126 sec
+2024-06-22 10:29:54,880 | INFO | 
+train_accuracy: 0.934 train_precision: 0.936 train_recall: 0.934 train_f1: 0.934 valid_accuracy: 0.936 valid_precision: 0.938 valid_recall: 0.936 valid_f1: 0.936 total_time: 47865.033 sec

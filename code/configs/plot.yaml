@@ -1,0 +1,6 @@
+models: [CancerVGGNet11, CancerVGGNet13, CancerResNet11, CancerResNet18]
+datasets: [cancer]
+log_path: ./logs/
+plot_path: ./plot/
+dpi: 70
+clip: [0.0, 3.0]
